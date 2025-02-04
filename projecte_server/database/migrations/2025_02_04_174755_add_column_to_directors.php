@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('directors', function (Blueprint $table) {
             //
-            $table->char('nom', length: 50);
-            $table->char('cognoms', length: 50);
+            $table->char('name', length: 50);
+            $table->char('surname', length: 50);
             $table->text('image')->nullable();
         });
     }
