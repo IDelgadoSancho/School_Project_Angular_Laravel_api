@@ -32,6 +32,6 @@ Route::post('/director/{id}', [ApiController::class, 'updateDirector']);
 
 Route::delete('/director/{id}', [ApiController::class, 'deleteDirector']);
 
-//--Imatge
+//--Image
 
-Route::get('/image/{id_director}', [ApiController::class, 'getImatge']);
+Route::get('/image/{id_director}', [ApiController::class, 'getImage']);

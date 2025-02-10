@@ -46,12 +46,12 @@ class ApiController extends Controller
     {
         $directors = director::all();
         foreach ($directors as $director) {
-            $director->imatge = url("/api/image/{$director->id}");
+            $director->image = url("/api/image/{$director->id}");
         }
         return $directors;
     }
 
-    function getImatge($id_director)
+    function getImage($id_director)
     {
         $director = director::find($id_director);
         $headers = ['Content-Type' => 'image/jpeg'];
@@ -100,7 +100,7 @@ class ApiController extends Controller
             $id = uniqid();
             $filename = $director->name . "_" . $director->surname . $id . "." . $extension;
             $file->move(public_path(env('IMG_ROUTE')), $filename);
-            $director->imatge = $filename;
+            $director->image = $filename;
         }
 
         $director->save();
