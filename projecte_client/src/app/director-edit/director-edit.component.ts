@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-director-edit',
-  imports: [],
+  standalone: false,
   templateUrl: './director-edit.component.html',
   styleUrl: './director-edit.component.css'
 })

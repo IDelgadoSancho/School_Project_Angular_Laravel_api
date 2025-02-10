@@ -22,7 +22,6 @@ const routes: Routes = [
   { path: 'director-create', component: DirectorCreateComponent },
   { path: 'director-edit/:id', component: DirectorEditComponent },
 
-
   { path: 'film-create', component: FilmCreateComponent },
   { path: 'film-list', component: FilmListComponent },
   { path: 'film-edit/:id', component: FilmEditComponent },

@@ -6,6 +6,12 @@ import { Component } from '@angular/core';
   standalone: false,
   styleUrl: './app.component.css'
 })
+
 export class AppComponent {
-  title = 'projecte_client';
+  title = 'WELCOME TO THE FILMOTECA!';
+  nom = 'Ismael';
+  cognoms = 'Delgado';
+  retornarNomCognoms(){
+    return this.nom + ' ' + this.cognoms;
+  }
 }

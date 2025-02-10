@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-director-create',
-  imports: [],
+  standalone: false,
   templateUrl: './director-create.component.html',
   styleUrl: './director-create.component.css'
 })

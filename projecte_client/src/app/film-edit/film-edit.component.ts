@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-film-edit',
-  imports: [],
+  standalone: false,
   templateUrl: './film-edit.component.html',
   styleUrl: './film-edit.component.css'
 })
