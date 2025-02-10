@@ -2,7 +2,7 @@ import { IDirector } from "./idirector";
 
 export interface IFilm {
     id: number;
-    autor: IDirector;
+    director: IDirector;
     title: string;
     dataP: string;
     duration: string;

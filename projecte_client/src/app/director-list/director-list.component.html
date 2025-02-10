@@ -1,1 +1,48 @@
-<p>director-list works!</p>
+<div class="panel panel-primary">
+    <div class="panel-heading container-fluid mt-5">
+        <h1>{{titolLlistat}}</h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Filter:{{listFilter}}</h3>
+            </div>
+        </div>
+
+        <!-- caixa de filtrat -->
+        <div class="row">
+            <div class="col-md-2">
+                Put a Filter:
+            </div>
+            <div class="col">
+                <input type="text" [(ngModel)]="listFilter">
+            </div>
+        </div>
+        <!-- fi caixa filtrat -->
+    </div>
+
+    <div *ngIf="directors.length==0">
+        <h4>There's not directors</h4>
+    </div>
+    <div *ngIf="directors.length>0" class="table-responsive">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>NAME</th>
+                    <th>COGNOMS</th>
+                    <th>IMAGE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let director of directors | directorListFilter:listFilter">
+                    <td>{{director.name}}</td>
+                    <td>{{director.surname}}</td>
+                    <td><img src="{{director.image}}" alt="" width=200px></td>
+                    <td><button class="btn btn-success" [routerLink]="['/director-edit', director.id]">Edit</button>
+                    </td>
+                    <td><button class="btn btn-danger" (click)="deleteDirector(director.id)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
