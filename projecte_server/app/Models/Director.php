@@ -13,4 +13,9 @@ class Director extends Model
         $director = Director::find($id);
         return $director->name . " " . $director->surname;
     }
+
+    public function shows()
+    {
+        return $this->belongsToMany(Show::class, 'director_show');
+    }
 }

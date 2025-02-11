@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Film;
 use App\Models\Director;
+use App\Models\Show;
 
 
 class ApiController extends Controller
 {
 
     //------------------------film--------------------------------------
-    function getFilm()
+
+    function getFilms()
     {
         return Film::with('director')->get();
     }
@@ -114,4 +116,37 @@ class ApiController extends Controller
 
         return $director;
     }
+
+    // -------------------------------------shows-----------------------------------------
+
+    function getShows()
+    {
+        // Obtener todas las series con sus directores
+        return Show::with('directors')->get();
+    }
+
+    function getShowId($id)
+    {
+        return Film::find($id);
+    }
+
+    function updateShow(Request $request, $id)
+    {
+        $show = Show::find($id);
+        $show->update($request->all());
+        return $show;
+    }
+
+    function createShow(Request $request)
+    {
+        return Show::create($request->all());
+    }
+
+    function deleteShow($id)
+    {
+        $show = Show::find($id);
+        $show->delete();
+        return $show;
+    }
+
 }

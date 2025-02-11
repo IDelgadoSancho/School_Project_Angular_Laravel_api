@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
+
+use App\Models\Director;
+use App\Models\Show;
+use App\Models\Film;
 
 class FilmotecaSeeder extends Seeder
 {
@@ -15,23 +16,42 @@ class FilmotecaSeeder extends Seeder
      */
     public function run(): void
     {
-        $director_id = DB::table('directors')->insertGetId([
-            'name' => Str::random(10),
-            'surname' => Str::random(10),
+        Director::create(['name' => 'Christopher', 'surname' => ' Nolan']);
+        Director::create(['name' => 'Quentin ', 'surname' => 'Tarantino']);
+        Director::create(['name' => 'Ava ', 'surname' => 'DuVernay']);
+
+        $serie1 = Show::create(['title' => 'Stranger Things', 'dataP' => Carbon::today(), 'seasons' => 1]);
+        $serie2 = Show::create(['title' => 'Breaking Bad', 'dataP' => Carbon::today(), 'seasons' => 1]);
+        $serie3 = Show::create(['title' => 'The Crown', 'dataP' => Carbon::today(), 'seasons' => 1]);
+
+        // Obtener algunos directores
+        $director1 = Director::find(1); // Christopher Nolan
+        $director2 = Director::find(2); // Quentin Tarantino
+
+        // Establecer la relación muchos a muchos
+        $serie1->directors()->attach([$director1->id, $director2->id]);
+        $serie2->directors()->attach($director1->id);
+        $serie3->directors()->attach($director2->id);
+
+        Film::create([
+            'title' => 'Inception',
+            'dataP' => Carbon::today(),
+            'duration' => 120,
+            'director_id' => $director1->id, // Asignar a Christopher Nolan
         ]);
 
-        DB::table('films')->insert([
-            'title' => Str::random(20),
+        Film::create([
+            'title' => 'Pulp Fiction',
             'dataP' => Carbon::today(),
-            'duration' => mt_rand(15, 300),
-            'director_id' => $director_id
+            'duration' => 120,
+            'director_id' => $director2->id, // Asignar a Quentin Tarantino
         ]);
-        
-        DB::table('films')->insert([
-            'title' => Str::random(10),
+
+        Film::create([
+            'title' => 'Interstellar',
             'dataP' => Carbon::today(),
-            'duration' => mt_rand(15, 300),
-            'director_id' => $director_id
+            'duration' => 120,
+            'director_id' => $director1->id, // Asignar a Christopher Nolan
         ]);
     }
 }

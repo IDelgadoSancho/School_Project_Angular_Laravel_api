@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 //--Film
 
-Route::get('/films', [ApiController::class, 'getFilm']);
+Route::get('/films', [ApiController::class, 'getFilms']);
 
 Route::get('/films/{id}', [ApiController::class, 'getFilmId']);
 
@@ -35,3 +35,15 @@ Route::delete('/director/{id}', [ApiController::class, 'deleteDirector']);
 //--Image
 
 Route::get('/image/{id_director}', [ApiController::class, 'getImage']);
+
+//--Show
+
+Route::get('/shows', [ApiController::class, 'getShows']);
+
+Route::get('/shows/{id}', [ApiController::class, 'getShowId']);
+
+Route::post('/show', [ApiController::class, 'createShow']);
+
+Route::put('/show/{id}', [ApiController::class, 'updateShow']);
+
+Route::delete('/show/{id}', [ApiController::class, 'deleteShow']);
