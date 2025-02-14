@@ -13,6 +13,7 @@ import { FilmCreateComponent } from './film-create/film-create.component';
 import { FilmEditComponent } from './film-edit/film-edit.component';
 
 /** shows */
+import { ShowListComponent } from './show-list/show-list.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,9 @@ const routes: Routes = [
   { path: 'film-list', component: FilmListComponent },
   { path: 'film-create', component: FilmCreateComponent },
   { path: 'film-edit/:id', component: FilmEditComponent },
+
+  { path: 'show-list', component: ShowListComponent },
+
 
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: '**', redirectTo: 'welcome', pathMatch: 'full' },

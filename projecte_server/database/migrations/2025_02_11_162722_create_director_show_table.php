@@ -19,6 +19,7 @@ return new class extends Migration
 
             $table->foreign('director_id')->references('id')->on('directors')->onDelete('cascade');
             $table->foreign('show_id')->references('id')->on('shows')->onDelete('cascade');
+            $table->primary(['director_id', 'show_id']);
         });
     }
 

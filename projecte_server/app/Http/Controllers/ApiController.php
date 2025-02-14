@@ -127,19 +127,40 @@ class ApiController extends Controller
 
     function getShowId($id)
     {
-        return Film::find($id);
+        return Show::find($id);
     }
 
     function updateShow(Request $request, $id)
     {
         $show = Show::find($id);
-        $show->update($request->all());
+        if (isset($request->title))
+            $show->title = $request->title;
+        if (isset($request->dataP))
+            $show->dataP = $request->dataP;
+        if (isset($request->seasons))
+            $show->seasons = $request->seasons;
+
+        $show->save();
+
+        $directorIds = $request->input('directors'); // Array de IDs de directores
+        $show->directors()->sync($directorIds);
+
         return $show;
+
     }
 
     function createShow(Request $request)
     {
-        return Show::create($request->all());
+        $show = new show;
+        $show->title = $request->title;
+        $show->dataP = $request->dataP;
+        $show->seasons = $request->seasons;
+        $show->save();
+
+        $directorIds = $request->input('directors'); // Array de IDs de directores
+        $show->directors()->attach($directorIds);
+
+        return $show;
     }
 
     function deleteShow($id)

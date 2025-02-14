@@ -1,0 +1,38 @@
+<div class="panel panel-primary">
+    <div class="panel-heading container-fluid mt-5">
+        <h1>{{titolLlistat}}</h1>
+        <hr>
+    </div>
+    <div *ngIf="shows.length==0">
+        <h4>No hi ha films</h4>
+    </div>
+    <div *ngIf="shows.length>0" class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>TITLE</th>
+                    <th>DATE</th>
+                    <th>SEASONS</th>
+                    <th>DIRECTORS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let show of shows">
+                    <td>{{show.title}}</td>
+                    <td>{{show.dataP}}</td>
+                    <td>{{show.seasons}}</td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let director of show.directors">
+                                {{ director.name }} {{director.surname}}
+                            </li>
+                        </ul>
+                    </td>
+                    <!-- <td>{{show.director.name}} {{show.director.surname}}</td> -->
+                    <td><button class="btn btn-success" [routerLink]="['/show-edit', show.id]">Edit</button></td>
+                    <td><button class="btn btn-danger" (click)="deleteShow(show.id)">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

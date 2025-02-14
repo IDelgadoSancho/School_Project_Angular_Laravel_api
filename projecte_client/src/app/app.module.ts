@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { provideHttpClient } from '@angular/common/http';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { CommonModule } from '@angular/common';
 
 /** directors */
 import { DirectorListComponent } from './director-list/director-list.component';
@@ -17,9 +18,11 @@ import { DirectorListFilterPipe } from './director-list/director-list-filter.pip
 import { FilmListComponent } from './film-list/film-list.component';
 import { FilmCreateComponent } from './film-create/film-create.component';
 import { FilmEditComponent } from './film-edit/film-edit.component';
-import { CommonModule } from '@angular/common';
 
 /** shows */
+import { ShowListComponent } from './show-list/show-list.component';
+// import { ShowCreateComponent } from './show-create/show-create.component';
+// import { ShowEditComponent } from './show-edit/show-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { CommonModule } from '@angular/common';
     FilmListComponent,
     FilmCreateComponent,
     FilmEditComponent,
+    ShowListComponent,
+    // ShowCreateComponent,
+    // ShowEditComponent,
   ],
   imports: [
     BrowserModule,
