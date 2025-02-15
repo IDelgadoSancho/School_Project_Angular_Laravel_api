@@ -21,8 +21,8 @@ import { FilmEditComponent } from './film-edit/film-edit.component';
 
 /** shows */
 import { ShowListComponent } from './show-list/show-list.component';
-// import { ShowCreateComponent } from './show-create/show-create.component';
-// import { ShowEditComponent } from './show-edit/show-edit.component';
+import { ShowCreateComponent } from './show-create/show-create.component';
+import { ShowEditComponent } from './show-edit/show-edit.component';
 
 @NgModule({
   declarations: [
@@ -37,8 +37,8 @@ import { ShowListComponent } from './show-list/show-list.component';
     FilmCreateComponent,
     FilmEditComponent,
     ShowListComponent,
-    // ShowCreateComponent,
-    // ShowEditComponent,
+    ShowCreateComponent,
+    ShowEditComponent,
   ],
   imports: [
     BrowserModule,

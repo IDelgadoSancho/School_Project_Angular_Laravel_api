@@ -10,17 +10,20 @@
             <input type="date" class="form-control" formControlName="dataP" id="dataP">
         </div>
         <div class="form-group">
-            <label for="seasons" class="mt-2 mb-1">Duration:</label>
+            <label for="seasons" class="mt-2 mb-1">Seasons:</label>
             <input type="number" class="form-control" formControlName="seasons" id="seasons">
         </div>
         <div class="form-group">
-            <label for="director_id" class="mt-2 mb-1">Director:</label>
-            <select class="form-select" formControlName="director_id">
-                <option [value]="director.id" *ngFor="let director of directors">{{ director.name + ' ' +
-                    director.surname }}</option>
-            </select>
+            <label for="director_id" class="mt-2 mb-1">Directors:</label>
+
+            <div *ngFor="let director of directors">
+                <label><input type="checkbox" [value]="director.id"
+                        (change)="onDirectorChange(director.id, $event)">
+                    {{director.name + ' ' + director.surname}}</label>
+            </div>
+
         </div>
-        <button type="submit" class="btn btn-primary mt-3">Create Film</button>
+        <button type="submit" class="btn btn-primary mt-3">Create Show</button>
     </form>
 </div>
 <div *ngIf="errorMessage" class="alert alert-danger mt-3">

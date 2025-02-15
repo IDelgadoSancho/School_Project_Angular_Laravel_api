@@ -18,6 +18,7 @@ export class ShowCreateComponent {
   errorMessage = "";
   FilmService: any;
   directors: IDirector[] = [];
+  selectedDirectors: number[] = [];
 
   constructor(
     private dadesShowsService: DadesShowsService,
@@ -26,6 +27,8 @@ export class ShowCreateComponent {
     this.myForm = new FormGroup({})
   }
   ngOnInit(): void {
+
+    // Take all directors
     this.dadesDirectorsService.getDades().subscribe({
       next: (response: HttpResponse<IDirector[]>) => {
         this.directors = response.body || [];
@@ -34,12 +37,26 @@ export class ShowCreateComponent {
         this.errorMessage = error.message;
       }
     })
+
     this.myForm = this.formBuilder.group({
       title: [null],
       dataP: [null],
       seasons: [null],
       directors: [null]
     });
+  }
+
+  /**
+   * onDirectorChange
+   */
+  public onDirectorChange(dir_id: number, e: Event) {
+    const checked = (e.target as HTMLInputElement).checked;
+    if (checked) {
+      this.selectedDirectors.push(dir_id);
+    } else {
+      this.selectedDirectors = this.selectedDirectors.filter(id => id !== dir_id);
+    }
+    this.myForm.get('directors')?.setValue(this.selectedDirectors);
   }
 
   /**

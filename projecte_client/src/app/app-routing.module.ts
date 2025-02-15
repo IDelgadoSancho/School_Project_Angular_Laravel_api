@@ -14,6 +14,8 @@ import { FilmEditComponent } from './film-edit/film-edit.component';
 
 /** shows */
 import { ShowListComponent } from './show-list/show-list.component';
+import { ShowCreateComponent } from './show-create/show-create.component';
+import { ShowEditComponent } from './show-edit/show-edit.component';
 
 
 const routes: Routes = [
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path: 'film-edit/:id', component: FilmEditComponent },
 
   { path: 'show-list', component: ShowListComponent },
+  { path: 'show-create', component: ShowCreateComponent },
+  { path: 'show-edit/:id', component: ShowEditComponent },
 
 
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
