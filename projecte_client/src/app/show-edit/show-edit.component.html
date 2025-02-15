@@ -1,1 +1,31 @@
-<p>show-edit works!</p>
+<div class="container">
+    <h3 class="fill-remaining-space">Edit Show</h3>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+        <div class="form-group">
+            <label for="title" class="mt-2 mb-1">Title:</label>
+            <input class="form-control" formControlName="title" id="title" type="text">
+        </div>
+        <div class="form-group">
+            <label for="dataP" class="mt-2 mb-1">Published Date:</label>
+            <input type="date" class="form-control" formControlName="dataP" id="dataP">
+        </div>
+        <div class="form-group">
+            <label for="seasons" class="mt-2 mb-1">Seasons:</label>
+            <input type="number" class="form-control" formControlName="seasons" id="seasons">
+        </div>
+        <div class="form-group">
+            <label for="director_id" class="mt-2 mb-1">Directors:</label>
+
+            <div *ngFor="let director of directors">
+                <label><input type="checkbox" [value]="director.id" (change)="onDirectorChange(director.id, $event)">
+                    {{director.name + ' ' + director.surname}}
+                </label>
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Edit Show</button>
+    </form>
+</div>
+<div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+</div>
