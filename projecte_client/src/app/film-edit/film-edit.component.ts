@@ -20,6 +20,8 @@ export class FilmEditComponent {
   myForm: FormGroup;
   errorMessage = "";
   directors: IDirector[] = [];
+  selectedFile: File | null = null;
+
 
   constructor(
     private dadesFilmsService: DadesFilmsService,
@@ -36,11 +38,12 @@ export class FilmEditComponent {
     this.dadesFilmsService.getFilm(this.id).subscribe({
       next: (data: any) => {
         const film = data.body;
-        this.myForm.setValue({
+        this.myForm.patchValue({
           title: film.title,
           dataP: film.dataP,
           duration: film.duration,
-          director_id: film.director_id
+          director_id: film.director_id,
+          image: film.image,
           // fem el mateix per la resta de camps
         });
       },
@@ -54,7 +57,7 @@ export class FilmEditComponent {
         this.directors = response.body || [];
       },
       error: (error) => {
-        this.errorMessage = error.message;
+        this.errorMessage = error.error.message;
       }
     })
 
@@ -62,17 +65,34 @@ export class FilmEditComponent {
       title: [null],
       dataP: [null],
       duration: [null],
-      director_id: [null]
+      director_id: [null],
+      image: [null],
     });
+  }
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    this.selectedFile = file;
+    console.log(file);
   }
 
   /**
    * onSubmit
    */
-  public onSubmit(film: any) {
-    this.dadesFilmsService.editFilm(this.id, film).pipe(
+  public onSubmit() {
+    const formData = new FormData();
+    formData.append('title', this.myForm.get('title')?.value);
+    formData.append('dataP', this.myForm.get('dataP')?.value);
+    formData.append('duration', this.myForm.get('duration')?.value);
+    formData.append('director_id', this.myForm.get('director_id')?.value);
+
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+
+    this.dadesFilmsService.editFilm(this.id, formData).pipe(
       catchError(error => {
-        this.errorMessage = error.message;
+        this.errorMessage = error.error.message;
         return of(null);
       })
     ).subscribe({

@@ -19,6 +19,8 @@ export class FilmCreateComponent {
   errorMessage = "";
   FilmService: any;
   directors: IDirector[] = [];
+  selectedFile: File | null = null;
+
 
   constructor(private dadesFilmsService: DadesFilmsService, private router: Router, private formBuilder: FormBuilder, private dadesDirectorsService: DadesDirectorsService) {
     this.myForm = new FormGroup({})
@@ -36,17 +38,35 @@ export class FilmCreateComponent {
       title: [null],
       dataP: [null],
       duration: [null],
-      director_id: [null]
+      director_id: [null],
+      image: [null]
+
     });
+  }
+
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    this.selectedFile = file;
+    console.log(file);
   }
 
   /**
    * onSubmit
    */
-  public onSubmit(llibre: any) {
-    this.dadesFilmsService.createFilm(llibre).pipe(
+  public onSubmit() {
+    const formData = new FormData();
+    formData.append('title', this.myForm.get('title')?.value);
+    formData.append('dataP', this.myForm.get('dataP')?.value);
+    formData.append('duration', this.myForm.get('duration')?.value);
+    formData.append('director_id', this.myForm.get('director_id')?.value);
+
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+
+    this.dadesFilmsService.createFilm(formData).pipe(
       catchError(error => {
-        this.errorMessage = error.message;
+        this.errorMessage = error.error.message;
         return of(null);
       })
     ).subscribe({

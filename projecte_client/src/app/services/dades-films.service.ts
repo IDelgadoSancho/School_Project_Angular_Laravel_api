@@ -30,7 +30,7 @@ export class DadesFilmsService {
    * getFilm(id: any)
    */
   public editFilm(id: any, dada: any) {
-    return this._http.put<IFilm>(`/api/film/${id}`, dada, { observe: 'response' });
+    return this._http.post<IFilm>(`/api/film/${id}`, dada, { observe: 'response' });
   }
 
   /**

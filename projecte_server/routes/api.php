@@ -16,7 +16,7 @@ Route::get('/films/{id}', [ApiController::class, 'getFilmId']);
 
 Route::post('/film', [ApiController::class, 'createFilm']);
 
-Route::put('/film/{id}', [ApiController::class, 'updateFilm']);
+Route::post('/film/{id}', [ApiController::class, 'updateFilm']);
 
 Route::delete('/film/{id}', [ApiController::class, 'deleteFilm']);
 
@@ -32,9 +32,17 @@ Route::post('/director/{id}', [ApiController::class, 'updateDirector']);
 
 Route::delete('/director/{id}', [ApiController::class, 'deleteDirector']);
 
-//--Image
+//--Image-directors
 
-Route::get('/image/{id_director}', [ApiController::class, 'getImage']);
+Route::get('/imagedir/{id_director}', [ApiController::class, 'getImageDir']);
+
+//--Image-films
+
+Route::get('/imagefilm/{id_film}', [ApiController::class, 'getImageFilm']);
+
+//--Image-show
+
+Route::get('/imageshow/{id_show}', [ApiController::class, 'getImageShow']);
 
 //--Show
 

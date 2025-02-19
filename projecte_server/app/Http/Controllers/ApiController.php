@@ -15,7 +15,11 @@ class ApiController extends Controller
 
     function getFilms()
     {
-        return Film::with('director')->get();
+        $films = Film::with('director')->get();
+        foreach ($films as $film) {
+            $film->image = url("/api/imagefilm/{$film->id}");
+        }
+        return $films;
     }
 
     function getFilmId($id)
@@ -25,14 +29,49 @@ class ApiController extends Controller
 
     function updateFilm(Request $request, $id)
     {
-        $film = Film::find($id);
-        $film->update($request->all());
+        $film = film::find($id);
+
+        if (isset($request->title))
+            $film->title = $request->title;
+        if (isset($request->dataP))
+            $film->dataP = $request->dataP;
+        if (isset($request->duration))
+            $film->duration = $request->duration;
+
+        // imagen
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $id = uniqid();
+            $filename = $film->title . "_" . $id . "." . $extension;
+            $file->move(public_path(env('IMG_ROUTE')), $filename);
+            $film->image = $filename;
+        }
+
+        $film->save();
         return $film;
     }
 
     function createFilm(Request $request)
     {
-        return Film::create($request->all());
+        $film = new film;
+        $film->title = $request->title;
+        $film->dataP = $request->dataP;
+        $film->duration = $request->duration;
+        $film->director_id = $request->director_id;
+
+        // imagen
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $id = uniqid();
+            $filename = $film->title . "_" . $id . "." . $extension;
+            $file->move(public_path(env('IMG_ROUTE')), $filename);
+            $film->image = $filename;
+        }
+
+        $film->save();
+        return $film;
     }
 
     function deleteFilm($id)
@@ -42,18 +81,28 @@ class ApiController extends Controller
         return $film;
     }
 
+    //image-film
+    function getImageFilm($id_film)
+    {
+        $film = Film::find($id_film);
+        $headers = ['Content-Type' => 'image/jpeg'];
+        $path = public_path(path: env('IMG_ROUTE') . $film->image);
+        return response()->file($path, $headers);
+    }
+
     // -------------------------------------director-----------------------------------------
 
     function getDirector()
     {
         $directors = director::all();
         foreach ($directors as $director) {
-            $director->image = url("/api/image/{$director->id}");
+            $director->image = url("/api/imagedir/{$director->id}");
         }
         return $directors;
     }
 
-    function getImage($id_director)
+    //image-dir
+    function getImageDir($id_director)
     {
         $director = director::find($id_director);
         $headers = ['Content-Type' => 'image/jpeg'];
@@ -168,6 +217,15 @@ class ApiController extends Controller
         $show = Show::find($id);
         $show->delete();
         return $show;
+    }
+
+    //image-show
+    function getImageShow($id_show)
+    {
+        $show = Film::find($id_show);
+        $headers = ['Content-Type' => 'image/jpeg'];
+        $path = public_path(path: env('IMG_ROUTE') . $show->image);
+        return response()->file($path, $headers);
     }
 
 }

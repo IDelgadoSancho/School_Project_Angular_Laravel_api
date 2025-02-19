@@ -7,4 +7,5 @@ export interface IFilm {
     dataP: string;
     duration: string;
     director_id: number;
+    image: string | null;
 }

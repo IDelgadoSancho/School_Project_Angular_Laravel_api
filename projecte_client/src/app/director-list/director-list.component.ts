@@ -31,6 +31,6 @@ export class DirectorListComponent {
   }
 
   directors: IDirector[] = [];
-  titolLlistat = 'Llistat d’directors';
+  titolLlistat = 'Directors List';
   listFilter = "";
 }

@@ -39,7 +39,7 @@ export class DirectorEditComponent {
         });
       },
       error: (error: any) => {
-        this.errorMessage = error.message;
+        this.errorMessage = error.error.message;
       }
     });
 

@@ -1,6 +1,6 @@
 <div class="container">
     <h3 class="fill-remaining-space">Edit Film</h3>
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="title" class="mt-2 mb-1">Title:</label>
             <input class="form-control" formControlName="title" id="title" type="text">
@@ -12,6 +12,10 @@
         <div class="form-group">
             <label for="duration" class="mt-2 mb-1">Duration:</label>
             <input type="number" class="form-control" formControlName="duration" id="duration">
+        </div>
+        <div class="form-group">
+            <label for="image" class="mt-2 mb-1">image:</label>
+            <input type="file" name="image" formControlName="image" (change)="onFileChange($event)" />
         </div>
         <div class="form-group">
             <label for="director_id" class="mt-2 mb-1">Director:</label>

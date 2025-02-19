@@ -23,7 +23,7 @@ export class FilmListComponent {
   }
 
   films: IFilm[] = [];
-  titolLlistat = 'Llistat de films';
+  titolLlistat = 'Films List';
 
   /**
      * eliminarfilm
