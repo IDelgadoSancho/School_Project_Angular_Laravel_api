@@ -28,7 +28,7 @@ export class ShowListComponent {
 
   directors: IDirector[] = [];
   shows: IShow[] = [];
-  titolLlistat = 'Shows List';
+  titolLlistat = 'SHOWS';
 
   public extractDirectors(shows: IShow[]): IDirector[] {
     const directorsArray: IDirector[] = [];

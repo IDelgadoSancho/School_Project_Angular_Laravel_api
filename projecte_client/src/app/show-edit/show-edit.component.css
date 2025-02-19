@@ -1,0 +1,42 @@
+.container {
+    background-color: #1c1c1c; /* Dark background */
+    color: #ffffff; /* White text */
+    border: 2px solid #444; /* Subtle border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 20px; /* Padding */
+}
+
+h3 {
+    background-color: #333; /* Slightly lighter dark background */
+    color: #ffffff; /* White text */
+    padding: 10px; /* Padding */
+    border-radius: 5px 5px 0 0; /* Rounded top corners */
+}
+
+.form-group {
+    margin-bottom: 15px; /* Space between form groups */
+}
+
+.form-control {
+    background-color: #1c1c1c; /* Dark background */
+    color: #ffffff; /* White text */
+    border: 2px solid #444; /* Subtle border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding */
+}
+
+.btn-primary {
+    background-color: #333; /* Slightly lighter dark background */
+    color: #ffffff; /* White text */
+    border: 2px solid #444; /* Subtle border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding */
+}
+
+.alert-danger {
+    background-color: #ff4444; /* Red background */
+    color: #ffffff; /* White text */
+    border: 2px solid #ff0000; /* Red border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding */
+}

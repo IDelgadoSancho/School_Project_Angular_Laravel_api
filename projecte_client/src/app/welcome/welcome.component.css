@@ -1,0 +1,38 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+}
+
+.full-width-image {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Place on top */
+    max-height: 90vh; /* Set a maximum height relative to the viewport height */
+}
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Full height of the container */
+    position: relative;
+    z-index: 0; /* Place below the top image */
+}
+
+.centered-image {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+}

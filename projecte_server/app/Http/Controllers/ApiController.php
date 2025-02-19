@@ -37,6 +37,9 @@ class ApiController extends Controller
             $film->dataP = $request->dataP;
         if (isset($request->duration))
             $film->duration = $request->duration;
+        if (isset($request->director_id))
+            $film->director_id = $request->director_id;
+
 
         // imagen
         if ($request->file('image')) {
@@ -194,7 +197,7 @@ class ApiController extends Controller
         if (isset($request->seasons))
             $show->seasons = $request->seasons;
 
-            // imagen
+        // imagen
         if ($request->file('image')) {
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();

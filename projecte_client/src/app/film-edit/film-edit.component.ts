@@ -48,7 +48,7 @@ export class FilmEditComponent {
         });
       },
       error: (error: any) => {
-        this.errorMessage = error.message;
+        this.errorMessage = error.error.message;
       }
     });
 
