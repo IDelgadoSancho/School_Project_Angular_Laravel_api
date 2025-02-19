@@ -171,7 +171,12 @@ class ApiController extends Controller
     function getShows()
     {
         // Obtener todas las series con sus directores
-        return Show::with('directors')->get();
+        $shows = Show::with('directors')->get();
+
+        foreach ($shows as $show) {
+            $show->image = url("/api/imageshow/{$show->id}");
+        }
+        return $shows;
     }
 
     function getShowId($id)
@@ -189,10 +194,22 @@ class ApiController extends Controller
         if (isset($request->seasons))
             $show->seasons = $request->seasons;
 
+            // imagen
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $id = uniqid();
+            $filename = $show->title . "_" . $id . "." . $extension;
+            $file->move(public_path(env('IMG_ROUTE')), $filename);
+            $show->image = $filename;
+        }
+
         $show->save();
 
-        $directorIds = $request->input('directors'); // Array de IDs de directores
-        $show->directors()->sync($directorIds);
+        $directors = json_decode($request->input('directors'), true);
+
+        // $directorIds = $request->input('directors'); // Array de IDs de directores
+        $show->directors()->sync($directors);
 
         return $show;
 
@@ -204,10 +221,23 @@ class ApiController extends Controller
         $show->title = $request->title;
         $show->dataP = $request->dataP;
         $show->seasons = $request->seasons;
-        $show->save();
+        $show->image = $request->image;
 
-        $directorIds = $request->input('directors'); // Array de IDs de directores
-        $show->directors()->attach($directorIds);
+        // imagen
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $id = uniqid();
+            $filename = $show->title . "_" . $id . "." . $extension;
+            $file->move(public_path(env('IMG_ROUTE')), $filename);
+            $show->image = $filename;
+        }
+
+        $show->save();
+        // $directorIds = $request->input('directors'); // Array de IDs de directores
+        $directors = json_decode($request->input('directors'), true);
+
+        $show->directors()->attach($directors);
 
         return $show;
     }
@@ -222,7 +252,7 @@ class ApiController extends Controller
     //image-show
     function getImageShow($id_show)
     {
-        $show = Film::find($id_show);
+        $show = Show::find($id_show);
         $headers = ['Content-Type' => 'image/jpeg'];
         $path = public_path(path: env('IMG_ROUTE') . $show->image);
         return response()->file($path, $headers);

@@ -6,4 +6,6 @@ export interface IShow {
     title: string;
     dataP: string;
     seasons: string;
+    image: string | null;
+
 }

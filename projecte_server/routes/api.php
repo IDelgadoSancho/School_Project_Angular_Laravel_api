@@ -52,6 +52,6 @@ Route::get('/shows/{id}', [ApiController::class, 'getShowId']);
 
 Route::post('/show', [ApiController::class, 'createShow']);
 
-Route::put('/show/{id}', [ApiController::class, 'updateShow']);
+Route::post('/show/{id}', [ApiController::class, 'updateShow']);
 
 Route::delete('/show/{id}', [ApiController::class, 'deleteShow']);

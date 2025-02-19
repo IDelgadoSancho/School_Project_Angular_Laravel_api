@@ -31,7 +31,7 @@ export class DadesShowsService {
    * getShow(id: any)
    */
   public editShow(id: any, dada: any) {
-    return this._http.put<IShow>(`/api/show/${id}`, dada, { observe: 'response' });
+    return this._http.post<IShow>(`/api/show/${id}`, dada, { observe: 'response' });
   }
 
   /**

@@ -14,6 +14,7 @@
                     <th>DATE</th>
                     <th>SEASONS</th>
                     <th>DIRECTORS</th>
+                    <th>IMAGE</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,7 @@
                             </li>
                         </ul>
                     </td>
+                    <td><img src="{{show.image}}" alt="" width=200px></td>
                     <!-- <td>{{show.director.name}} {{show.director.surname}}</td> -->
                     <td><button class="btn btn-info" [routerLink]="['/show-edit', show.id]">Edit</button></td>
                     <td><button class="btn btn-danger" (click)="deleteShow(show.id)">Delete</button></td>

@@ -22,7 +22,7 @@ export class ShowEditComponent {
   directors: IDirector[] = [];
   selectedDirectors: number[] = [];
   id: string | null | undefined;
-
+  selectedFile: File | null = null;
 
   constructor(
     private dadesShowsService: DadesShowsService,
@@ -39,7 +39,7 @@ export class ShowEditComponent {
         this.directors = response.body || [];
       },
       error: (error) => {
-        this.errorMessage = error.message;
+        this.errorMessage = error.error.message;
       }
     })
 
@@ -57,7 +57,7 @@ export class ShowEditComponent {
         });
       },
       error: (error: any) => {
-        this.errorMessage = error.message;
+        this.errorMessage = error.error.message;
       }
     });
 
@@ -65,7 +65,8 @@ export class ShowEditComponent {
       title: [null],
       dataP: [null],
       seasons: [null],
-      directors: [null]
+      directors: [[]],
+      image: [null]
     });
   }
 
@@ -82,13 +83,31 @@ export class ShowEditComponent {
     this.myForm.get('directors')?.setValue(this.selectedDirectors);
   }
 
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    this.selectedFile = file;
+    console.log(file);
+  }
+
   /**
    * onSubmit
    */
-  public onSubmit(show: any) {
-    this.dadesShowsService.editShow(this.id, show).pipe(
+  public onSubmit() {
+    const formData = new FormData();
+    formData.append('title', this.myForm.get('title')?.value);
+    formData.append('dataP', this.myForm.get('dataP')?.value);
+    formData.append('seasons', this.myForm.get('seasons')?.value);
+
+    const directors = this.myForm.get('directors')?.value;
+    formData.append('directors', JSON.stringify(directors));
+
+    if (this.selectedFile) {
+      formData.append('image', this.selectedFile);
+    }
+
+    this.dadesShowsService.editShow(this.id, formData).pipe(
       catchError(error => {
-        this.errorMessage = error.message;
+        this.errorMessage = error.error.message;
         return of(null);
       })
     ).subscribe({
